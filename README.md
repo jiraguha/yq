@@ -9,7 +9,7 @@ $ cat > file.yaml << EOF
 foo: bar
 version: 1.2
 EOF
-$ cat file.yaml | docker run -i karlkfi/yq -r '.version'
+$ cat file.yaml | sudo docker run -i karlkfi/yq -r '.version'
 1.2
 ```
 
@@ -38,6 +38,6 @@ $ cat > file.json << EOF
   "version": 1.2
 }
 EOF
-$ cat file.json | docker run -i --entrypoint jq karlkfi/yq -r '.version'
+$ cat file.json | sudo docker run -i --entrypoint jq karlkfi/yq -r '.version'
 1.2
 ```
