@@ -1,20 +1,43 @@
 # yq in docker
 
-Docker build containing the awesome work done [here](https://github.com/abesto/yq)
+Docker image containing [yq](https://github.com/abesto/yq), a yaml wrapper of [jq](https://github.com/stedolan/jq).
 
-This is to yaml what jq is to json.
-
-To use you can do something like this:
+Example Usage:
 
 ```
-cat file.yaml | docker run -i evns/yq ".version"
-```
-
-If file.yaml looked like this:
-
-```
+$ cat > file.yaml << EOF
 foo: bar
 version: 1.2
+EOF
+$ cat file.yaml | docker run -i karlkfi/yq -r '.version'
+1.2
 ```
 
-The above call would return "1.2"
+Bash function:
+
+```
+function yq() {
+  sudo docker run -i karlkfi/yq "$@"
+}
+cat file.yaml | yq -r '.version'
+```
+
+Bash alias:
+
+```
+alias yq="sudo docker run -i karlkfi/yq"
+cat file.yaml | yq -r '.version'
+```
+
+Bonus jq usage:
+
+```
+$ cat > file.json << EOF
+{
+  "foo": "bar",
+  "version": 1.2
+}
+EOF
+$ cat file.json | docker run -i --entrypoint jq karlkfi/yq -r '.version'
+1.2
+```
