@@ -1,13 +1,6 @@
 FROM alpine:3.7
 
-ENV PACKAGES="\
-  py-pip \
-  jq \
-"
-
-RUN apk add --update --no-cache $PACKAGES \
-  && pip install yq \
-  && rm /var/cache/apk/*
+RUN apk add --update --no-cache py-pip jq=1.5-r4 \
+  && pip install --no-cache-dir yq==2.4.1
 
 ENTRYPOINT ["yq"]
-CMD []
