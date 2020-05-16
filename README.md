@@ -1,23 +1,21 @@
 # yq in docker
 
-Docker image containing [yq](https://github.com/abesto/yq), a yaml wrapper of [jq](https://github.com/stedolan/jq).
-
 Example Usage:
 
 ```
 $ cat > file.yaml << EOF
 foo: bar
-version: 1.2
+version: 2.10.1
 EOF
-$ cat file.yaml | sudo docker run -i karlkfi/yq -r '.version'
-1.2
+$ cat file.yaml | sudo docker run -i jpiraguha/yq -r '.version'
+2.10.1
 ```
 
 Bash function:
 
 ```
 function yq() {
-  sudo docker run -i karlkfi/yq "$@"
+  sudo docker run -i jpiraguha/yq "$@"
 }
 cat file.yaml | yq -r '.version'
 ```
@@ -25,7 +23,7 @@ cat file.yaml | yq -r '.version'
 Bash alias:
 
 ```
-alias yq="sudo docker run -i karlkfi/yq"
+alias yq="sudo docker run -i jpiraguha/yq"
 cat file.yaml | yq -r '.version'
 ```
 
@@ -35,9 +33,9 @@ Bonus jq usage:
 $ cat > file.json << EOF
 {
   "foo": "bar",
-  "version": 1.2
+  "version": 2.10.1
 }
 EOF
-$ cat file.json | sudo docker run -i --entrypoint jq karlkfi/yq -r '.version'
-1.2
+$ cat file.json | sudo docker run -i --entrypoint jq jpiraguha/yq -r '.version'
+2.10.1
 ```
